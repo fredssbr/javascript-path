@@ -37,4 +37,4 @@ STRINGS - simple text
 "eight " + "5 " + "six " + "two " + "3 " + "7";
 
 //1.12 - Length of a string
-"All work no play makes Jack a boy".length;
+"All work no play makes Jack a dull boy".length;
