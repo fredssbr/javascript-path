@@ -22,3 +22,12 @@ if(trainsOperational > 0){
 }else{
     console.log("No trains are operational today. Bummer!");
 }
+
+var gotName = false;
+while(gotName == false){
+    var userName = prompt("Yo passenger! What's your name?");
+    if(confirm("Are you sure your name is " + userName + "?")){
+        alert("Sup " + userName + "!");
+        gotName = true;
+    }
+}
