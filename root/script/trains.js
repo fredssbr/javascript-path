@@ -31,3 +31,46 @@ while(gotName == false){
         gotName = true;
     }
 }
+
+function addPassenger(name, list){
+    if(list.length == 0){
+        list.push(name);
+    }else{
+        for(var index = 0; index < list.length; index++){
+            if(list[index] == undefined){
+                list[index] = name;
+                return list;
+            }else if(index == list.length - 1){
+                list.push(name);
+                return list;
+            }
+        }
+    }
+    return list;
+}
+
+function deletePassenger(name, list){
+    if(list.length == 0){
+        console.log("List is empty!");
+    }else{
+        for(var index = 0; index < list.length; index++){
+            if(list[index] == name){
+                list[index] = undefined;
+                return list;
+            }else if(index == list.length -1){
+                console.log("Passenger not found!")
+                return list;
+            }
+        }
+    }
+    return list;
+}
+
+var passengerList = [];
+passengerList = addPassenger("Fred Silva", passengerList);
+passengerList = addPassenger("Joahn Sebastian", passengerList);
+passengerList = addPassenger("Mathias Balzac", passengerList);
+passengerList = deletePassenger("Fred Silva", passengerList);
+passengerList = deletePassenger("Fred Silva", passengerList);
+passengerList = addPassenger("Wolfgang Mozart", passengerList);
+
