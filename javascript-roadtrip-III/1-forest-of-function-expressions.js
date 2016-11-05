@@ -21,6 +21,12 @@ It applies the function for every element of the array(the array element is pass
 var number = [12, 4, 3, 9, 8, 6, 10, 1];
 var results = number.map(function(arrayCell){return arrayCell * 2;});
 
+/*
+SHIFT - returns the cell that it removes from the front of the array
+*/
+var fastPassQueue = ["Cedar Coaster", "Pines Plunge", "Birch Bumpers", "Pines Plunge"];
+var firstElement = fastPassQueue.shift();
+
 //1.2
 var runAway = function() {
     var toAlert = "";
@@ -84,3 +90,44 @@ var puzzlers = [function(input){return 3 * input - 8;},
                 function(input){return input * input - 9;},
                 function(input){return input % 4;}
                ];
+
+//1.11
+function adventureSelector(userChoice) {
+    switch(userChoice){
+        case 1:
+            return function(){ alert("You selected the Vines of Doom!");};
+            break;
+        case 2:
+            return function(){ alert("Looks like you want the Lake of Despair!");};
+            break;
+        case 3:
+            return function(){ alert("The Caves of Catastrophe!");};
+            break;
+    }
+}
+
+//1.12
+adventureSelector(3)();
+
+//1.13
+var puzzlers = [
+  function(a) { return 8 * a - 10; },
+  function(a) { return (a - 3) * (a - 3) * (a - 3); },
+  function(a) { return a * a + 4; },
+  function(a) { return a % 5; }
+];
+
+var start = 2;
+
+var applyAndEmpty = function(num, queue){
+    var len = queue.length;
+    for(var i = 0; i < len; i++){
+        num = queue.shift()(num);
+    }
+    return num;
+};
+
+alert(applyAndEmpty(start, puzzlers));
+
+//1.14
+alert(puzzlers[puzzlers[1](3)](puzzlers[3](9)));
