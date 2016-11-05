@@ -36,3 +36,18 @@ function buildTicket(allRides, passRides, pick){
 
 var wantsRide = "Birch Bumpers";
 buildTicket(parkRides, fastPassQueue, wantsRide)();
+
+function buildCoveTicketMaker(transport){
+    var passengerNumber = 0;
+    return function(name){
+        passengerNumber++;
+        alert("Here is your transportation ticket via the " + transport + ".\n" +
+             "Welcome to the Cold Closures Cove, " + name + "!" +
+             "You are passenger #" + passengerNumber + ".");
+    };
+}
+
+var getSubmarineTicket = buildCoveTicketMaker("Submarine");
+getSubmarineTicket("Mario");
+getSubmarineTicket("Toad");
+getSubmarineTicket("Luigi");
