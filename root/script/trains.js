@@ -74,3 +74,20 @@ passengerList = deletePassenger("Fred Silva", passengerList);
 passengerList = deletePassenger("Fred Silva", passengerList);
 passengerList = addPassenger("Wolfgang Mozart", passengerList);
 
+
+function verifyCapacity(passengers, capacity){
+    
+    var noSeatsLeft = function(){
+        alert("There are no seats left.")
+    };
+    
+    var seatsAvail = function(){
+        alert("There are " + (capacity - passengers) + "seats available.")        
+    };
+    
+    if(passengers == capacity){
+        noSeatsLeft();
+    }else{
+        seatsAvail();
+    }
+}
