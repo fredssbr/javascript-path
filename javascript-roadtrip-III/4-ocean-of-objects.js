@@ -248,3 +248,68 @@ lighthouseRock.addBulb = function(name, wattage){
 lighthouseRock.addBulb("Blasterbright", 5000);
 lighthouseRock.addBulb("Sight Slayer", 1800);
 lighthouseRock.addBulb("Burner of Souls", 7500);
+
+/*
+What if we want to count the number of properties of our aquarium object?
+Objects don't have a length property like an array.
+
+FOR-IN loop: alows us to access each enumerable property in turn
+*/
+var numFish = 0;
+for (key in aquarium){
+    console.log(key);//this will only log out the names of the properties as strings
+    if(aquarium[key].type == "fish"){
+        numFish++;
+    }
+}
+
+// let's add this function to our object aquarium as a method
+aquarium.countFish = function(){
+    var numFish = 0;
+    for (key in this){
+        if(this[key].type == "fish"){
+            numFish++;
+        }
+    }
+    return numFish;
+};
+
+var poorDory = aquarium.takeOut("Dory");
+
+aquarium.countFish();
+
+//4.17
+var rockSpearguns = {
+    Sharpshooter: {barbs: 2, weight: 10, heft: "overhand"},
+    Pokepistol: {barbs: 4, weight: 8, heft: "shoulder"},
+    Javelinjet: {barbs: 4, weight: 12, heft: "waist"},
+    Firefork: {barbs: 6, weight: 8, heft: "overhand"},
+    "The Impaler": {barbs: 1, weight: 30, heft: "chest"}
+};
+
+function listGuns(guns){
+    for(speargun in guns){
+        console.log(speargun);
+    }
+}
+
+listGuns(rockSpearguns);
+
+//4.18
+function listGuns(guns){
+    for(speargun in guns){
+        console.log("Behold! " + speargun + ", with " + guns[speargun].heft + " heft!");
+    }
+}
+
+//4.19
+rockSpearguns["listGuns"] = function(){
+    for(property in this){
+        if(this[property]["heft"] != undefined){
+            console.log("Behold! " + property + ", with " + this[property].heft + " heft!");
+        }
+    }
+}
+
+rockSpearguns["listGuns"]();
+
