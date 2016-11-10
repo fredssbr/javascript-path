@@ -346,3 +346,104 @@ Fencepost.prototype = {
         this.y = y;
     }
 };
+
+/*
+METHODS of PROTOTYPES
+
+valueOf() - it brings the primitive value of the object.
+For example, it gets the number out of a string.
+*/
+
+var x = 4;
+var y = "4";
+
+x.valueOf() == y.valueOf();
+//returns true because operator == ignores the type of the value
+//HOWEVER
+x.valueOf() === y.valueOf();
+//returns false because it does not ignore the type of the value (it's prefered over ==)
+
+/*
+OVERRIDING PROTOTYPAL PROPERTIES
+
+Let's say we want a more informative result from valueOf() over a custom object 
+*/
+
+var Tornado = function(category, affectedAreas, windGust){
+    this.category = category;
+    this.affectedAreas = affectedAreas;
+    this.windGust = windGust;
+}
+
+var cities = [["Kansas City", 464310], ["Topeka", 127939], ["Lenexa", 49398]];
+var twister = new Tornado("F5", cities, 220);
+
+//Overriding valueOf
+Tornado.prototype.valueOf = function(){
+    var sum = 0;
+    for(var i = 0; i < this.affectedAreas.length; i++){
+        sum += this.affectedAreas[i][1];
+    }
+    return sum;
+};
+
+//It won't call the Object.prototype.valueOf
+twister.valueOf();
+
+/* 
+toString()
+*/
+Tornado.prototype.toString = function(){
+    var list = "";
+    for(var i = 0; i < this.affectedAreas.length; i++){
+        if(i < this.affectedAreas.length - 1){
+            list = list + this.affectedAreas[i][0] + ", ";
+        }else{
+            list = list + "and " + this.affectedAreas[i][0];
+        }
+    }
+    return "This tornado has been classified as an " + this.category + 
+        ", with wind gusts up to " + this.windGust + "mph. Affected areas are: " +
+        list + ", pottentially affecting a population of " + this.valueOf() + ".";
+};
+
+twister.toString();
+
+twister.constructor;
+twister.constructor.prototype;
+twister.__proto__;
+
+/*
+hasOwnProperty() - helps find the owner of a particular property
+*/
+
+//Object Prototype has no Prototype (it's the highest level)
+Object.prototype.findOwnerOfProperty = function(propName){
+    var currentObject = this;
+    while(currentObject !== null){
+        if(currentObject.hasOwnProperty(propName)){
+            return currentObject;
+        }else{
+            currentObject = currentObject.__proto__;
+        }        
+    }
+    return "No property found!";
+};
+
+twister.findOwnerOfProperty("valueOf");
+twister.findOwnerOfProperty("goToOz");
+
+//5.13
+Fencepost.prototype.valueOf = function(){
+	return Math.sqrt( Math.pow(this.x, 2) + Math.pow(this.y, 2));
+};
+
+//5.14
+Fencepost.prototype.toString = function(){
+    var list = "";
+    for (var i = 0; i < this.connectionsTo.length; i++){
+        list += this.connectionsTo[i].postNum + "\n";
+    }
+    return "Fence post #" + this.postNum + ":\n" +
+        "Connected to posts:\n" + list + "Distance from ranch: " + this.valueOf() + " yards";
+};
